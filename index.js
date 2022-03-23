@@ -36,6 +36,22 @@ client.connect(err => {
   app.delete('/delete/:id',(req, res) =>{
     collection.deleteOne({_id: ObjectId(req.params.id)})
   })
+  app.get('/userData/:id', (req, res) => {
+    collection.find({_id: ObjectId(req.params.id)})
+    .toArray((err, documents)=> {
+      res.send(documents[0])
+    })
+  })
+
+  app.patch('/update/:id', (req, res) => {
+    collection.updateOne({_id: ObjectId(req.params.id)},
+    {
+      $set: {name: req.body.name, email: req.body.email, salary: req.body.salary}
+    })
+    .then(result =>{
+      console.log(result);
+    })
+  })
 
 
 });
