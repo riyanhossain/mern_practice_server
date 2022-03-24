@@ -46,7 +46,7 @@ client.connect(err => {
   app.patch('/update/:id', (req, res) => {
     collection.updateOne({_id: ObjectId(req.params.id)},
     {
-      $set: {name: req.body.name, email: req.body.email, salary: req.body.salary}
+      $set: {name: req.body.name, email: req.body.email, salary: req.body.salary, gender: req.body.gender}
     })
     .then(result =>{
       console.log(result);
